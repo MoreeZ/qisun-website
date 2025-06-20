@@ -6,12 +6,17 @@ import argparse
 def convert_to_webp(source_path, quality=80):
     """Convert an image to WebP format with specified quality"""
     try:
-        # Open the image
-        image = Image.open(source_path)
-        
         # Create WebP filename (same path but with .webp extension)
         file_name, _ = os.path.splitext(source_path)
         webp_path = f"{file_name}.webp"
+        
+        # Check if WebP version already exists
+        if os.path.exists(webp_path):
+            print(f"Skipped: {source_path} (WebP version already exists)")
+            return True
+        
+        # Open the image
+        image = Image.open(source_path)
         
         # Convert and save as WebP
         image.save(webp_path, 'webp', quality=quality)
@@ -38,6 +43,7 @@ def process_directory(directory_path, quality=80, delete_original=False):
     # Track statistics
     total_files = 0
     converted_files = 0
+    skipped_files = 0
     total_original_size = 0
     total_webp_size = 0
     
@@ -47,23 +53,29 @@ def process_directory(directory_path, quality=80, delete_original=False):
             # Check if file is an image with supported extension
             if file.lower().endswith(('.png', '.jpg', '.jpeg')):
                 file_path = os.path.join(root, file)
+                webp_path = os.path.splitext(file_path)[0] + '.webp'
                 
                 # Get original size before conversion
                 original_size = os.path.getsize(file_path) / 1024  # KB
                 total_original_size += original_size
                 total_files += 1
                 
+                # Check if WebP already exists
+                webp_exists = os.path.exists(webp_path)
+                
                 # Convert the file
                 if convert_to_webp(file_path, quality):
-                    converted_files += 1
+                    if webp_exists:
+                        skipped_files += 1
+                    else:
+                        converted_files += 1
                     
                     # Get WebP size after conversion
-                    webp_path = os.path.splitext(file_path)[0] + '.webp'
                     webp_size = os.path.getsize(webp_path) / 1024  # KB
                     total_webp_size += webp_size
                     
                     # Delete original if requested
-                    if delete_original:
+                    if delete_original and not webp_exists:
                         os.remove(file_path)
                         print(f"  Original file deleted")
     
@@ -73,6 +85,7 @@ def process_directory(directory_path, quality=80, delete_original=False):
         print("\nConversion Summary:")
         print(f"  Total images processed: {total_files}")
         print(f"  Successfully converted: {converted_files}")
+        print(f"  Skipped (WebP exists): {skipped_files}")
         print(f"  Total original size: {total_original_size:.2f} KB")
         print(f"  Total WebP size: {total_webp_size:.2f} KB")
         print(f"  Overall reduction: {overall_reduction:.2f}%")
