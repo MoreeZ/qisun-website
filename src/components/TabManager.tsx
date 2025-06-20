@@ -35,17 +35,13 @@ const TabManager = <T extends string>({
         transition={{ duration: 0.6, ease: "easeIn", delay: 0.2 }}
         viewport={{ once: true }}
       />
-      <div className="flex flex-wrap">
+      <div className="w-full overflow-x-auto scrollbar-hide">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeInOut", delay: 0.6 }}
           viewport={{ once: true }}
-          style={{ 
-            width: "100%", 
-            display: "flex", 
-            flexWrap: "wrap" 
-          }}
+          className="flex min-w-max"
         >
           {tabs.map((tab, index) => (
             <motion.div
@@ -58,9 +54,10 @@ const TabManager = <T extends string>({
                 delay: 0.2 + (index * 0.2) 
               }}
               viewport={{ once: true }}
+              className="flex-shrink-0"
             >
               <button
-                className={`px-6 py-3 font-medium ${
+                className={`px-3 sm:px-4 md:px-6 py-2 md:py-3 text-sm md:text-base font-medium whitespace-nowrap ${
                   activeTab === tab.id
                     ? "text-primary border-b-2 border-primary"
                     : "text-gray-600 hover:text-primary"

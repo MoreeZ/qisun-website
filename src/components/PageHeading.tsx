@@ -8,7 +8,7 @@ interface PageHeadingProps {
 
 const PageHeading: React.FC<PageHeadingProps> = ({ headingText, subheadingText }) => {
   return (
-    <div className="text-center mb-14">
+    <div className="text-center mb-12">
       <motion.div
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
