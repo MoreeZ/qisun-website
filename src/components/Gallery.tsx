@@ -52,7 +52,21 @@ const Gallery = ({ images, title }: GalleryProps) => {
 
   return (
     <div className="my-8">
-      {title && <h3 className="text-2xl font-bold mb-4">{title}</h3>}
+      {title && (
+        <div className="mb-12 mt-16 text-center">
+          <h2 className="section-title text-gray-900">
+            <motion.span
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              viewport={{ once: true, margin: "-100px" }}
+              style={{ display: 'block' }}
+            >
+              {title}
+            </motion.span>
+          </h2>
+        </div>
+      )}
       <motion.div
         variants={containerVariants}
         initial="hidden"

@@ -63,11 +63,19 @@ import cover7 from "../assets/images/design/covers/7.webp";
 import cover8 from "../assets/images/design/covers/8.webp";
 import cover9 from "../assets/images/design/covers/9.webp";
 import cover10 from "../assets/images/design/covers/10.webp";
+import cover11 from "../assets/images/design/covers/11.webp";
 
 const Design = () => {
   const [activeTab, setActiveTab] = useState<
     "posters" | "webs" | "bags" | "covers"
   >("posters");
+
+  // Design icon used in both the page heading and background
+  const designIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1zm-9-1a2 2 0 0 1 4 0v1h-4V6zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2v10z"/>
+    </svg>
+  );
 
   // Poster images
   const posterImages = [
@@ -132,6 +140,7 @@ const Design = () => {
     { src: cover8, alt: "Cover Design 8" },
     { src: cover9, alt: "Cover Design 9" },
     { src: cover10, alt: "Cover Design 10" },
+    { src: cover11, alt: "Cover Design 11" },
   ];
 
   return (
@@ -141,12 +150,16 @@ const Design = () => {
         description="Explore Qi Sun's design portfolio featuring posters, web designs, bags, and covers. View creative work across various design disciplines."
         keywords="Qi Sun, design, portfolio, posters, web design, bags, covers, graphic design"
       />
-      <div className="pt-14">
+      <div className="pt-0">
       {/* Design Categories */}
-      <Section bgColor="fancy">
+      <Section 
+        bgColor="fancy"
+        backgroundIcon={designIcon}
+      >
       <PageHeading
         headingText="Design Portfolio"
         subheadingText="A collection of my design work across various mediums"
+        icon={designIcon}
       />
 
         <TabManager

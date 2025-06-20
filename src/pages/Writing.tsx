@@ -35,6 +35,13 @@ const Writing = () => {
   // State to track which category is selected
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>("film");
 
+  // Writing icon used in both the page heading and background
+  const writingIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M6.94 14.036c-.233.624-.43 1.2-.606 1.783.96-.697 2.101-1.139 3.418-1.304 2.513-.314 4.746-1.973 5.876-4.058l-1.456-1.455 1.413-1.415 1-1.001c.43-.43.915-1.224 1.428-2.368-5.593.867-9.018 4.292-11.074 9.818zM17 9.001L18 10c-1 3-4 6-8 6.5-2.669.334-4.336 2.167-5.002 5.5H3C4 16 6 2 21 2c-1 2.997-1.998 4.996-2.997 5.997L17 9.001z"/>
+    </svg>
+  );
+
   // Define all writing projects
   const writingProjects: ProjectsData = {
     film: [
@@ -96,91 +103,93 @@ const Writing = () => {
   };
 
   return (
-    <div className="pt-20 bg-gray-50">
-      <Section>
-        <div className="mb-8">
-          <PageHeading
-            headingText="My Writing"
-            subheadingText="A showcase of stories shaped by curiosity, craft, and a love for character-driven storytelling."
+    <>
+      <Section 
+        bgColor="fancy"
+        backgroundIcon={writingIcon}
+      >
+        <PageHeading
+          headingText="My Writing"
+          subheadingText="A showcase of stories shaped by curiosity, craft, and a love for character-driven storytelling."
+          icon={writingIcon}
+        />
+
+        {/* Category Navigation */}
+        <div className="mb-12">
+          <TabManager
+            activeTab={activeCategory}
+            setActiveTab={setActiveCategory}
+            tabs={[
+              { id: "film", label: categoryTitles.film },
+              { id: "short", label: categoryTitles.short },
+              { id: "tv", label: categoryTitles.tv },
+              { id: "novel", label: categoryTitles.novel },
+            ]}
+            className="justify-center"
           />
+        </div>
 
-          {/* Category Navigation */}
-          <div className="mb-12">
-            <TabManager
-              activeTab={activeCategory}
-              setActiveTab={setActiveCategory}
-              tabs={[
-                { id: "film", label: categoryTitles.film },
-                { id: "short", label: categoryTitles.short },
-                { id: "tv", label: categoryTitles.tv },
-                { id: "novel", label: categoryTitles.novel },
-              ]}
-              className="justify-center"
-            />
-          </div>
-
-          {/* Project Cards */}
-          <div className="grid grid-cols-1 gap-8">
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
-              viewport={{ once: true }}
-              style={{ width: "100%" }}
-            >
-              {writingProjects[activeCategory].map(
-                (project: Project, index: number) => (
-                  <motion.div
-                    key={`${activeCategory}-${index}`}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      duration: 0.6,
-                      ease: "easeOut",
-                      delay: 0.2,
-                    }}
+        {/* Project Cards */}
+        <div className="grid grid-cols-1 gap-8">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+            viewport={{ once: true }}
+            style={{ width: "100%" }}
+          >
+            {writingProjects[activeCategory].map(
+              (project: Project, index: number) => (
+                <motion.div
+                  key={`${activeCategory}-${index}`}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.6,
+                    ease: "easeOut",
+                    delay: 0.2,
+                  }}
+                >
+                  <div
+                    key={index}
+                    className="bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl"
                   >
-                    <div
-                      key={index}
-                      className="bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl"
-                    >
-                      <div className="p-8">
-                        <div className="flex flex-wrap gap-2 mb-4">
-                          {project.tags.map((tag: string, tagIndex: number) => (
-                            <span
-                              key={tagIndex}
-                              className="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-
-                        <h3 className="text-2xl font-bold mb-4">
-                          {project.title}
-                        </h3>
-
-                        <div className="mb-6">
-                          <p className="text-gray-600 leading-relaxed">
-                            {project.description}
-                          </p>
-                        </div>
-
-                        <PDFViewer
-                          pdfUrl={project.pdfUrl}
-                          title={project.pdfTitle}
-                          description={project.pdfDescription}
-                        />
+                    <div className="p-8">
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {project.tags.map((tag: string, tagIndex: number) => (
+                          <span
+                            key={tagIndex}
+                            className="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full"
+                          >
+                            {tag}
+                          </span>
+                        ))}
                       </div>
+
+                      <h3 className="text-2xl font-bold mb-4">
+                        {project.title}
+                      </h3>
+
+                      <div className="mb-6">
+                        <p className="text-gray-600 leading-relaxed">
+                          {project.description}
+                        </p>
+                      </div>
+
+                      <PDFViewer
+                        pdfUrl={project.pdfUrl}
+                        title={project.pdfTitle}
+                        description={project.pdfDescription}
+                      />
                     </div>
-                  </motion.div>
-                )
-              )}
-            </motion.div>
-          </div>
+                  </div>
+                </motion.div>
+              )
+            )}
+          </motion.div>
         </div>
       </Section>
-    </div>
+    </>
   );
 };
 

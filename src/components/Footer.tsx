@@ -6,7 +6,7 @@ const Footer = () => {
   const isContactPage = location.pathname === '/contact';
 
   return (
-    <footer className="bg-gray-900 text-white py-12">
+    <footer className="bg-dark-plum text-white py-12">
       {!isContactPage && (
         <div className="text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Let's Connect</h2>

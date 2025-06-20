@@ -7,16 +7,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#437af0",
+        primary: "#e84393",
         secondary: "#10b981",
         accent: "#8b5cf6",
         dark: "#1f2937",
         light: "#f9fafb",
+        "dark-plum": "#2d1b2d",
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        serif: ['Merriweather', 'serif'],
         montserrat: ['Montserrat', 'sans-serif'],
+        handwriting: ['Architects Daughter', 'cursive'],
+        cinzel: ['Cinzel', 'serif'],
       },
     },
   },

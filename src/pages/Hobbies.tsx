@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import PageHeading from "../components/PageHeading";
 import TabManager from "../components/TabManager";
 import SEO from "../components/SEO";
+import ListCardGrid from "../components/ListCardGrid";
 
 import hairStickImageHeader from "../assets/images/hobbies/hair_sticks/header.webp";
 import hairStickImage2 from "../assets/images/hobbies/hair_sticks/2.webp";
@@ -60,7 +61,15 @@ import travelImage34 from "../assets/images/hobbies/travel/34.webp";
 const Hobbies = () => {
   const [activeTab, setActiveTab] = useState<
     "hairSticks" | "reading" | "travel"
-  >("hairSticks");
+  >("travel");
+
+  // Hobbies icon used in both the page heading and background
+  const hobbiesIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M6 22h15v-2H6.012C5.55 19.988 5 19.805 5 19s.55-.988 1.012-1H21V4c0-1.103-.897-2-2-2H6c-1.206 0-3 .799-3 3v14c0 2.201 1.794 3 3 3zM5 8V5c0-.805.55-.988 1-1h13v12H5V8z"/>
+      <path d="M8 6h9v2H8z"/>
+    </svg>
+  );
 
   // Hair sticks images
   const hairStickImages = [
@@ -121,232 +130,38 @@ const Hobbies = () => {
 
   return (
     <>
-      <SEO 
-        title="Hobbies" 
+      <SEO
+        title="Hobbies"
         description="Discover Qi Sun's personal interests including wooden hairpin collection, reading preferences, and travel experiences around the world."
         keywords="Qi Sun, hobbies, wooden hairpins, reading, travel, personal interests, collection"
       />
-      <div className="pt-20">
-      {/* Hobby Categories */}
-      <Section bgColor="fancy">
-        <PageHeading
-          headingText="My Hobbies"
-          subheadingText="Exploring my creative interests and personal passions"
-        />
-        <TabManager
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          tabs={[
-            { id: "hairSticks", label: "Wooden Hairpins" },
-            { id: "reading", label: "Reading" },
-            { id: "travel", label: "Travel" }
-          ]}
-          className="mt-8"
-        />
+      <div className="pt-0">
+        {/* Hobby Categories */}
+        <Section 
+          bgColor="fancy"
+          backgroundIcon={hobbiesIcon}
+        >
+          <PageHeading
+            headingText="My Hobbies"
+            subheadingText="Exploring my creative interests and personal passions"
+            icon={hobbiesIcon}
+          />
+          <TabManager
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            tabs={[
+              { id: "travel", label: "Travel" },
+              { id: "reading", label: "Reading" },
+              { id: "hairSticks", label: "Wooden Hairpins" },
+            ]}
+            className="mt-8"
+          />
 
-        {/* Content based on active tab */}
-        <div>
-          {activeTab === "hairSticks" && (
-            <>
-              <div className="grid md:grid-cols-7 gap-8 mb-8">
-                <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{
-                    duration: 0.6,
-                    ease: "easeOut",
-                    delay: 0.2,
-                  }}
-                  viewport={{ once: true }}
-                  className="md:col-span-4"
-                >
-                  <h2 className="text-2xl font-bold mb-4">
-                    Wooden Hairpins Collection
-                  </h2>
-                  <p className="mb-4">
-                    I have a collection of wooden hairpins from various regions.
-                    My interest in wooden hairpins began when I was in middle
-                    school. I was drawn to their elegant designs and the
-                    craftsmanship involved in creating them.
-                  </p>
-                  <p className="mb-4">
-                    I prefer hairpins made from sandalwood, ebony, and other
-                    hardwoods. The natural fragrance of sandalwood is
-                    particularly appealing to me. Each hairpin in my collection
-                    has its own story and significance.
-                  </p>
-                  <p className="mb-4">
-                    What I find most fascinating about wooden hairpins is how
-                    they combine functionality with artistic expression. They're
-                    not just accessories; they're pieces of wearable art that
-                    connect me to traditional craftsmanship.
-                  </p>
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, x: 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
-                  viewport={{ once: true }}
-                  className="rounded-lg md:col-span-3"
-                >
-                  <div className="relative pb-[75%] overflow-hidden rounded-lg shadow-md">
-                    <img
-                      src={hairStickImageHeader}
-                      alt="Wooden Hairpin"
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                  </div>
-                </motion.div>
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
-                viewport={{ once: true }}
-              >
-                <Gallery
-                  images={hairStickImages}
-                  title="My Hairpin Collection"
-                />
-              </motion.div>
-            </>
-          )}
-
-          {activeTab === "reading" && (
-            <>
-              <div className="grid md:grid-cols-7 gap-8 mb-8">
-                <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                  className="rounded-lg md:col-span-3"
-                >
-                  <div className="relative pb-[75%] overflow-hidden rounded-lg shadow-md">
-                    <img
-                      src={readingImage3}
-                      alt="Reading"
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                  </div>
-                </motion.div>
-                <div className="md:col-span-4">
-                  <motion.div
-                    initial={{ opacity: 0, x: 30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{
-                      duration: 0.6,
-                      ease: "easeOut",
-                      delay: 0.2,
-                    }}
-                    viewport={{ once: true }}
-                    style={{ height: "100%" }}
-                  >
-                    <h2 className="text-2xl font-bold mb-4">
-                      My Reading Journey
-                    </h2>
-                    <p className="mb-4">
-                      Reading has been a lifelong passion for me. I started
-                      reading at a very young age and have never stopped. I
-                      enjoy a wide range of genres, including fiction,
-                      non-fiction, poetry, and philosophy.
-                    </p>
-                    <p className="mb-4">
-                      I particularly enjoy reading books that challenge my
-                      perspective and introduce me to new ideas. Some of my
-                      favorite authors include Haruki Murakami, Gabriel García
-                      Márquez, and Virginia Woolf.
-                    </p>
-                    <p className="mb-4">
-                      I also enjoy sharing my thoughts on books through social
-                      media. I have accounts on various platforms where I post
-                      reflections and recommendations. It's a way for me to
-                      connect with other book lovers and discover new reads.
-                    </p>
-                  </motion.div>
-                </div>
-              </div>
-              <motion.div
-                className="mb-8"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
-                viewport={{ once: true }}
-              >
-                <h3 className="text-xl font-bold mb-4">My Reading List</h3>
-              </motion.div>
-              <div className="grid md:grid-cols-3 gap-6">
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-                  viewport={{ once: true }}
-                  className="bg-white p-6 rounded-lg shadow-md"
-                >
-                  <h4 className="font-bold mb-2">Fiction Favorites</h4>
-                  <ul className="list-disc pl-5 space-y-1">
-                    <li>Norwegian Wood by Haruki Murakami</li>
-                    <li>
-                      One Hundred Years of Solitude by Gabriel García Márquez
-                    </li>
-                    <li>To the Lighthouse by Virginia Woolf</li>
-                    <li>The Great Gatsby by F. Scott Fitzgerald</li>
-                    <li>Pride and Prejudice by Jane Austen</li>
-                  </ul>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
-                  viewport={{ once: true }}
-                  className="bg-white p-6 rounded-lg shadow-md"
-                >
-                  {" "}
-                  <h4 className="font-bold mb-2">Non-Fiction Essentials</h4>
-                  <ul className="list-disc pl-5 space-y-1">
-                    <li>Sapiens by Yuval Noah Harari</li>
-                    <li>The Power of Habit by Charles Duhigg</li>
-                    <li>Thinking, Fast and Slow by Daniel Kahneman</li>
-                    <li>The Art of War by Sun Tzu</li>
-                    <li>Man's Search for Meaning by Viktor E. Frankl</li>
-                  </ul>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.6 }}
-                  viewport={{ once: true }}
-                  className="bg-white p-6 rounded-lg shadow-md"
-                >
-                  <h4 className="font-bold mb-2">Current Reading</h4>
-                  <ul className="list-disc pl-5 space-y-1">
-                    <li>The Midnight Library by Matt Haig</li>
-                    <li>Klara and the Sun by Kazuo Ishiguro</li>
-                    <li>A Promised Land by Barack Obama</li>
-                    <li>The Four Winds by Kristin Hannah</li>
-                    <li>Project Hail Mary by Andy Weir</li>
-                  </ul>
-                </motion.div>
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
-                viewport={{ once: true }}
-              >
-                <Gallery images={readingImages} title="Reading Moments" />
-              </motion.div>
-            </>
-          )}
-
-          {activeTab === "travel" && (
-            <>
-              <div className="grid md:grid-cols-7 gap-8 mb-8">
-                <div className="md:col-span-4">
+          {/* Content based on active tab */}
+          <div>
+            {activeTab === "hairSticks" && (
+              <>
+                <div className="grid md:grid-cols-7 gap-8 mb-8">
                   <motion.div
                     initial={{ opacity: 0, x: -30 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -356,127 +171,316 @@ const Hobbies = () => {
                       delay: 0.2,
                     }}
                     viewport={{ once: true }}
-                    style={{ height: "100%" }}
+                    className="md:col-span-4"
                   >
                     <h2 className="text-2xl font-bold mb-4">
-                      My Travel Adventures
+                      Wooden Hairpins Collection
                     </h2>
                     <p className="mb-4">
-                      Traveling is one of my greatest passions. I've been
-                      fortunate enough to visit many countries across Asia,
-                      Europe, and North America. Each journey has enriched my
-                      perspective and deepened my appreciation for different
-                      cultures.
+                      I have a collection of wooden hairpins from various
+                      regions. My interest in wooden hairpins began when I was
+                      in middle school. I was drawn to their elegant designs and
+                      the craftsmanship involved in creating them.
                     </p>
                     <p className="mb-4">
-                      I'm particularly drawn to places with rich histories and
-                      unique cultural traditions. Japan holds a special place in
-                      my heart, with its blend of ancient traditions and modern
-                      innovations. I've visited Tokyo, Kyoto, Osaka, and several
-                      other cities, each offering its own distinct experience.
+                      I prefer hairpins made from sandalwood, ebony, and other
+                      hardwoods. The natural fragrance of sandalwood is
+                      particularly appealing to me. Each hairpin in my
+                      collection has its own story and significance.
                     </p>
                     <p className="mb-4">
-                      Europe has also been a significant part of my travel
-                      experiences. I've explored the historic streets of Rome,
-                      admired the art in Paris, and enjoyed the vibrant
-                      atmosphere of Barcelona. Living in Dublin has given me the
-                      opportunity to explore Ireland's beautiful landscapes and
-                      rich cultural heritage.
+                      What I find most fascinating about wooden hairpins is how
+                      they combine functionality with artistic expression.
+                      They're not just accessories; they're pieces of wearable
+                      art that connect me to traditional craftsmanship.
                     </p>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, x: 30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
+                    viewport={{ once: true }}
+                    className="rounded-lg md:col-span-3"
+                  >
+                    <div className="relative pb-[75%] overflow-hidden rounded-lg shadow-md">
+                      <img
+                        src={hairStickImageHeader}
+                        alt="Wooden Hairpin"
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                    </div>
                   </motion.div>
                 </div>
 
                 <motion.div
-                  initial={{ opacity: 0, x: 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
                   viewport={{ once: true }}
-                  className="rounded-lg md:col-span-3"
                 >
-                  <div className="relative pb-[75%] overflow-hidden rounded-lg shadow-md">
-                    <img
-                      src={travelImageHeader}
-                      alt="Travel"
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
+                  <Gallery
+                    images={hairStickImages}
+                    title="My Hairpin Collection"
+                  />
+                </motion.div>
+              </>
+            )}
+
+            {activeTab === "reading" && (
+              <>
+                <div className="grid md:grid-cols-7 gap-8 mb-8">
+                  <motion.div
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    viewport={{ once: true }}
+                    className="rounded-lg md:col-span-3"
+                  >
+                    <div className="relative pb-[75%] overflow-hidden rounded-lg shadow-md">
+                      <img
+                        src={readingImage3}
+                        alt="Reading"
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                    </div>
+                  </motion.div>
+                  <div className="md:col-span-4">
+                    <motion.div
+                      initial={{ opacity: 0, x: 30 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{
+                        duration: 0.6,
+                        ease: "easeOut",
+                        delay: 0.2,
+                      }}
+                      viewport={{ once: true }}
+                      style={{ height: "100%" }}
+                    >
+                      <h2 className="text-2xl font-bold mb-4">
+                        My Reading Journey
+                      </h2>
+                      <p className="mb-4">
+                        Reading has been a lifelong passion for me. I started
+                        reading at a very young age and have never stopped. I
+                        enjoy a wide range of genres, including fiction,
+                        non-fiction, poetry, and philosophy.
+                      </p>
+                      <p className="mb-4">
+                        I particularly enjoy reading books that challenge my
+                        perspective and introduce me to new ideas. Some of my
+                        favorite authors include Haruki Murakami, Gabriel García
+                        Márquez, and Virginia Woolf.
+                      </p>
+                      <p className="mb-4">
+                        I also enjoy sharing my thoughts on books through social
+                        media. I have accounts on various platforms where I post
+                        reflections and recommendations. It's a way for me to
+                        connect with other book lovers and discover new reads.
+                      </p>
+                    </motion.div>
                   </div>
-                </motion.div>
-              </div>
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-                viewport={{ once: true }}
-              >
-                <h3 className="text-xl font-bold mb-4">
-                  Memorable Destinations
-                </h3>
-              </motion.div>
-              <div className="grid md:grid-cols-3 gap-6">
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-                  viewport={{ once: true }}
-                  className="bg-white p-6 rounded-lg shadow-md"
-                >
-                  <h4 className="font-bold mb-2">Mainland China</h4>
-                  <ul className="list-disc pl-5 space-y-1">
-                    <li>Xi'an</li>
-                    <li>Guilin</li>
-                    <li>Suzhou</li>
-                    <li>Chengdu</li>
-                    <li>300+ cities in total</li>
-                  </ul>
-                </motion.div>
+                </div>
+                <ListCardGrid 
+                  title="My Reading List"
+                  lists={[
+                    {
+                      title: "Biography",
+                      items: [
+                        "Isaac Khalatnikov - Landau: The Physicist and the Man",
+                        "Lin Yutang - The Gay Genius: The Life and Times of Su Tungpo",
+                        "Walter Isaacson - Steve Jobs",
+                        "Andrew Roberts - Napoleon: A Life",
+                        "Gerald Martin - Gabriel García Márquez: A Life",
+                        "James Gleick - Genius: The Life and Science of Richard Feynman",
+                        "Steven Naifeh and Gregory White Smith - Van Gogh: The Life",
+                        "William Schoell - Sonny Boy: The Life of Al Pacino",
+                        "Matthew Polly - Bruce Lee: A Life",
+                        "Deirdre Bair - Simone de Beauvoir: A Biography",
+                        "Jane Sherron De Hart - Ruth Bader Ginsburg: A Life",
+                      ]
+                    },
+                    {
+                      title: "Mystery",
+                      items: [
+                        "Edgar Allan Poe - The Murders in the Rue Morgue",
+                        "Edgar Allan Poe - The Purloined Letter",
+                        "Edgar Allan Poe - The Tell-Tale Heart",
+                        "Shinzo Mitsuda - The Locked Room in the Sky",
+                        "Shinzo Mitsuda - The Dismemberment on Dogra Magra Hill",
+                        "Shinzo Mitsuda - The Phantom Detective and the House of Wax",
+                        "Agatha Christie - Murder on the Orient Express",
+                        "Agatha Christie - And Then There Were None",
+                        "Agatha Christie - The Murder of Roger Ackroyd",
+                        "Edogawa Ranpo - The Human Chair",
+                        "Edogawa Ranpo - The Stalker in the Attic",
+                        "Edogawa Ranpo - Beast in the Shadows",
+                        "Arthur Conan Doyle - The Adventures of Sherlock Holmes",
+                        "Arthur Conan Doyle - The Hound of the Baskervilles",
+                        "Arthur Conan Doyle - The Sign of Four",
+                      ]
+                    },
+                    {
+                      title: "Classic Literature",
+                      items: [
+                        "Patrick Süskind - Perfume: The Story of a Murderer",
+                        "Gabriel García Márquez - Leaf Storm",
+                        "Emily Brontë - Wuthering Heights",
+                        "Cao Xueqin - Dream of the Red Chamber",
+                        "George Orwell - Animal Farm",
+                        "Aldous Huxley - Brave New World",
+                        "Albert Camus - The Stranger",
+                        "Alexandre Dumas - The Count of Monte Cristo",
+                        "W. Somerset Maugham - The Razor's Edge",
+                        "Solomon Northup - Twelve Years a Slave",
+                      ]
+                    },
+                    {
+                      title: "Recent List",
+                      items: [
+                        "Simone de Beauvoir - Memoirs of a Dutiful Daughter",
+                        "Robin Stern - The Gaslight Effect",
+                        "Yubume Ono - One Hundred Strange Tales",
+                        "Agatha Christie - Come, Tell Me How You Live",
+                        "Various - Handbook of Latin American Social Thought",
+                        "Judith Grisel - Never Enough: The Neuroscience and Experience of Addiction",
+                      ]
+                    },
+                    {
+                      title: "Current/Upcoming",
+                      items: [
+                        "Matt Haig - The Midnight Library",
+                        "Kazuo Ishiguro - Klara and the Sun",
+                        "Barack Obama - A Promised Land",
+                        "Kristin Hannah - The Four Winds",
+                        "Andy Weir - Project Hail Mary",
+                      ]
+                    }
+                  ]}
+                  columns={3}
+                  gap={6}
+                />
 
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
                   viewport={{ once: true }}
-                  className="bg-white p-6 rounded-lg shadow-md"
                 >
-                  <h4 className="font-bold mb-2">East & Southeast Asia</h4>
-                  <ul className="list-disc pl-5 space-y-1">
-                    <li>Seoul, South Korea</li>
-                    <li>Jeju Island, South Korea</li>
-                    <li>Bangkok, Thailand</li>
-                    <li>Chiang Mai, Thailand</li>
-                    <li>Kyoto, Japan</li>
-                  </ul>
+                  <Gallery images={readingImages} title="Gallery" />
                 </motion.div>
+              </>
+            )}
+
+            {activeTab === "travel" && (
+              <>
+                <div className="grid md:grid-cols-7 gap-8 mb-8">
+                  <div className="md:col-span-4">
+                    <motion.div
+                      initial={{ opacity: 0, x: -30 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{
+                        duration: 0.6,
+                        ease: "easeOut",
+                        delay: 0.2,
+                      }}
+                      viewport={{ once: true }}
+                      style={{ height: "100%" }}
+                    >
+                      <h2 className="text-2xl font-bold mb-4">
+                        My Travel Adventures
+                      </h2>
+                      <p className="mb-4">
+                        Traveling is one of my greatest passions. I've been
+                        fortunate enough to visit many countries across Asia,
+                        Europe, and North America. Each journey has enriched my
+                        perspective and deepened my appreciation for different
+                        cultures.
+                      </p>
+                      <p className="mb-4">
+                        I'm particularly drawn to places with rich histories and
+                        unique cultural traditions. Japan holds a special place
+                        in my heart, with its blend of ancient traditions and
+                        modern innovations. I've visited Tokyo, Kyoto, Osaka,
+                        and several other cities, each offering its own distinct
+                        experience.
+                      </p>
+                      <p className="mb-4">
+                        Europe has also been a significant part of my travel
+                        experiences. I've explored the historic streets of Rome,
+                        admired the art in Paris, and enjoyed the vibrant
+                        atmosphere of Barcelona. Living in Dublin has given me
+                        the opportunity to explore Ireland's beautiful
+                        landscapes and rich cultural heritage.
+                      </p>
+                    </motion.div>
+                  </div>
+
+                  <motion.div
+                    initial={{ opacity: 0, x: 30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
+                    viewport={{ once: true }}
+                    className="rounded-lg md:col-span-3"
+                  >
+                    <div className="relative pb-[75%] overflow-hidden rounded-lg shadow-md">
+                      <img
+                        src={travelImageHeader}
+                        alt="Travel"
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                    </div>
+                  </motion.div>
+                </div>
+                <ListCardGrid 
+                  title="Memorable Destinations"
+                  lists={[
+                    {
+                      title: "Mainland China",
+                      items: [
+                        "Xi'an",
+                        "Guilin",
+                        "Suzhou",
+                        "Chengdu",
+                        "300+ cities in total",
+                      ]
+                    },
+                    {
+                      title: "East & Southeast Asia",
+                      items: [
+                        "Seoul, South Korea",
+                        "Jeju Island, South Korea",
+                        "Bangkok, Thailand",
+                        "Chiang Mai, Thailand",
+                        "Kyoto, Japan",
+                      ]
+                    },
+                    {
+                      title: "Europe",
+                      items: [
+                        "Vienna, Austria",
+                        "Dublin, Ireland",
+                        "Various places across Ireland",
+                        "Other European countries",
+                      ]
+                    }
+                  ]}
+                  columns={3}
+                  gap={6}
+                />
 
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.6 }}
+                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
                   viewport={{ once: true }}
-                  className="bg-white p-6 rounded-lg shadow-md"
                 >
-                  <h4 className="font-bold mb-2">Europe</h4>
-                  <ul className="list-disc pl-5 space-y-1">
-                    <li>Vienna, Austria</li>
-                    <li>Dublin, Ireland</li>
-                    <li>Various places across Ireland</li>
-                    <li>Other European countries</li>
-                  </ul>
+                  <Gallery images={travelImages} title="Travel Memories" />
                 </motion.div>
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
-                viewport={{ once: true }}
-              >
-                <Gallery images={travelImages} title="Travel Memories" />
-              </motion.div>
-            </>
-          )}
-        </div>
-      </Section>
-    </div>
+              </>
+            )}
+          </div>
+        </Section>
+      </div>
     </>
   );
 };
