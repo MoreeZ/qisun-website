@@ -52,7 +52,7 @@ const Home = () => {
 
   return (
     <>
-      <SEO 
+      <SEO
         title="Home"
         description="Welcome to Qi Sun's personal website. Explore my work as a writer, designer, and digital marketer."
         keywords="Qi Sun, portfolio, writer, designer, digital marketer, personal website"
@@ -98,13 +98,12 @@ const Home = () => {
         {/* Scroll Down Arrow */}
         <motion.div
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer animate-bounce"
-          onClick={scrollToContent}
           aria-label="Scroll down"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.2 }}
         >
-          <div className="scroll-arrow"></div>
+          <button className="scroll-arrow" onClick={scrollToContent}></button>
         </motion.div>
       </section>
 

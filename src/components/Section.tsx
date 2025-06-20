@@ -1,5 +1,4 @@
-import { ReactNode } from 'react';
-import type { CSSProperties } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import './section.css';
 import { motion } from 'framer-motion';
 
