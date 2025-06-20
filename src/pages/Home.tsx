@@ -59,7 +59,7 @@ const Home = () => {
         url="https://qisun.com"
       />
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pb-16 md:pb-0">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pb-24 md:pb-0">
         <div
           className="absolute inset-0 z-0"
           style={{
