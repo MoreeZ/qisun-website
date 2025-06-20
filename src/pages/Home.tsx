@@ -42,12 +42,10 @@ const Home = () => {
     if (aboutSectionRef.current) {
       const startPosition = window.pageYOffset;
       // Get header height - assume 80px as default if we can't find it
-      const headerHeight = document.querySelector("header")?.offsetHeight || 80;
       // Adjust target position by subtracting header height
       const targetPosition =
         aboutSectionRef.current.getBoundingClientRect().top +
-        window.pageYOffset -
-        headerHeight;
+        window.pageYOffset;
       const distance = targetPosition - startPosition;
       const duration = 1000; // ms
       let start: number | null = null;
@@ -120,7 +118,7 @@ const Home = () => {
             Qi Sun
           </motion.h1>
           <motion.p
-            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl max-w-4xl mx-auto tracking-wider font-thin uppercase font-montserrat"
+            className="text-xs sm:text-base md:text-2xl lg:text-4xl max-w-4xl mx-auto tracking-wider font-thin uppercase font-montserrat"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}

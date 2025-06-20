@@ -131,7 +131,7 @@ const LoadingPage: React.FC = () => {
           </div>
 
           {/* Typewriter text */}
-          <div className="mt-24 md:mt-32 text-2xl md:text-3xl text-gray-800 flex items-center">
+          <div className="mt-24 md:mt-32 text-1xl md:text-3xl text-gray-800 flex items-center">
             <span className="font-bold mr-2 md:mr-4 font-handwriting" >{staticText}</span> 
             <span className="font-handwriting">{text}</span>
             <div style={{ display: "inline-block" }}>

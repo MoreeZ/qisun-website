@@ -196,12 +196,18 @@ const Header = () => {
               key={`mobile-${link.to}`}
               to={link.to}
               onClick={() => setIsMenuOpen(false)} // Close menu on item click
-              className={`block py-3 px-3 text-lg font-medium transition-all duration-300 rounded-md ${
+              className={`block py-3 px-3 text-lg font-medium transition-opacity duration-300 rounded-md relative ${
                 location.pathname === link.to
-                  ? "text-primary bg-gray-800 font-semibold"
-                  : "text-white hover:text-primary hover:bg-gray-700/50 active:bg-gray-700"
+                  ? "text-primary font-semibold pl-6"
+                  : "text-white hover:text-primary"
               }`}
+              aria-current={location.pathname === link.to ? "page" : undefined}
             >
+              {location.pathname === link.to && (
+                <span className="absolute left-0 top-1/2 -translate-y-1/2 text-primary">
+                  ▶
+                </span>
+              )}
               {link.label}
             </Link>
           ))}
