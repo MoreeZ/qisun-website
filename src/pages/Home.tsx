@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useRef } from "react";
 import Section from "../components/Section";
 import SEO from "../components/SEO";
+import QiIcon from "../components/QiIcon";
 import home_hero_image from "../assets/images/hobbies/reading/background.webp";
 import design_image from "../assets/images/design/bags/2.webp";
 import writing_image from "../assets/images/home_page/writing.webp";
@@ -26,17 +27,9 @@ const itemVariants = {
 const Home = () => {
   const aboutSectionRef = useRef<HTMLDivElement>(null);
 
-  // Lotus icon for the hero section
-  const lotusIcon = (
-    <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" className="w-24 h-24 mx-auto mb-4 text-white">
-      <rect fill="none" height="256" width="256"/>
-      <path d="M128,200c16,0,42.5-.2,72.9-17.8s40.3-39.5,43.4-50.8a7.9,7.9,0,0,0-5.7-9.8c-7.3-1.9-20.1-3.6-36.5.3" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="8"/>
-      <path d="M53.9,121.8c-16.4-3.8-29.2-2.1-36.5-.2a7.9,7.9,0,0,0-5.7,9.8c3.1,11.3,13,33.3,43.4,50.8S112,200,128,200" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="8"/>
-      <path d="M128,200s40-21.8,40-80c0-45.6-24.6-68.8-35.2-76.8a8.1,8.1,0,0,0-9.6,0C112.6,51.2,88,74.4,88,120,88,178.2,128,200,128,200Z" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="8"/>
-      <path d="M128,200c12-2.6,44.3-20.8,63.7-54.4s14.6-60.3,10.8-72a7.8,7.8,0,0,0-9.2-5.3,77.1,77.1,0,0,0-31.4,15.1" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="8"/>
-      <path d="M94.1,83.4A77.1,77.1,0,0,0,62.7,68.3a7.8,7.8,0,0,0-9.2,5.3c-3.8,11.7-8.6,38.5,10.8,72S116,197.4,128,200" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="8"/>
-    </svg>
-  );
+  // Icon for the hero section and background
+  const heroIcon = <QiIcon className="w-24 h-24 mx-auto mb-4 text-white" />;
+  const backgroundIcon = <QiIcon className="w-full h-full" />;
 
   const scrollToContent = () => {
     if (aboutSectionRef.current) {
@@ -107,7 +100,7 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}
           >
-            {lotusIcon}
+            {heroIcon}
           </motion.div>
           <motion.h1
             className="text-5xl sm:text-7xl md:text-9xl lg:text-[10rem] font-cinzel font-medium mb-6 md:mb-16 text-white tracking-wide"
@@ -141,7 +134,7 @@ const Home = () => {
 
       {/* About Preview Section */}
       <div ref={aboutSectionRef}>
-        <Section title="About Me">
+        <Section title="About Me" backgroundIcon={backgroundIcon}>
           <motion.div
             className="max-w-3xl mx-auto text-center"
             initial={{ opacity: 0, y: 50 }}
@@ -165,7 +158,7 @@ const Home = () => {
       </div>
 
       {/* Featured Work Section */}
-      <Section bgColor="fancy">
+      <Section bgColor="fancy" backgroundIcon={backgroundIcon}>
         <motion.div 
           className="featured-work-container"
           variants={featuredWorkVariants}
